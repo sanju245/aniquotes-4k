@@ -87,3 +87,10 @@ The Android UI now includes three-page onboarding, device details, favorite-char
 - Added a resumable 900-normal-wallpaper batch tool with an atomic job manifest, cost ceilings, duplicate/hash checks, image-size checks, retry limits, and review-only handling for outputs that miss 2160 × 3840.
 - Generated files remain local drafts by default. Optional Supabase Storage upload requires a server-only service-role key and does not publish assets or create catalog rows.
 - Configure and validate the local router from `admin/.env.local`; follow `docs/9ROUTER_WALLPAPER_PIPELINE.md`. The full batch is deliberately not started by dry-run or smoke mode.
+
+
+## Optional Colab + Drive wallpaper batch
+- `colab/aniquotes_4k_batch.ipynb` adds a separate resumable 900-still Colab + Drive draft batch and 80 1080p looping MP4 drafts from the first 80 stills.
+- Stills are rendered below 4K then upscaled to 2160 × 3840 and labeled as upscaled drafts; videos use FFmpeg pan/zoom from stills.
+- Drive manifests, per-session caps, deterministic seeds, SHA-256 checks, bounded retries, and a job lock support recovery.
+- This path leaves the local 9Router workflow unchanged and does not publish to Supabase or the app catalog. Free Colab sessions are temporary, not 24/7. See [`docs/COLAB_DRIVE_WALLPAPER_BATCH.md`](docs/COLAB_DRIVE_WALLPAPER_BATCH.md).
